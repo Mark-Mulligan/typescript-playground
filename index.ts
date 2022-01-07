@@ -1,6 +1,4 @@
-type twoDimensionArr = string[][] | number[][];
-
-const flat = (inputArr: twoDimensionArr) => {
+const flat = <T>(inputArr: T[][]): T[] => {
   let result = [];
 
   for (let i = 0; i < inputArr.length; i++) {
