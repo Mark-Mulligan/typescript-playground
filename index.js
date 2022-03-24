@@ -1,12 +1,15 @@
-function isAllUpper(text) {
-    var upperCaseRegex = /^[^a-z]+$/;
-    if (text.length > 0) {
-        var match = text.match(upperCaseRegex);
-        if (match)
-            return match[0].length === text.length;
-        return false;
+function beginningZeros(text) {
+    var numArr = text.split('');
+    var numberOfZeros = 0;
+    for (var i = 0; i < text.length; i++) {
+        if (numArr[i] === '0') {
+            numberOfZeros++;
+        }
+        else {
+            break;
+        }
     }
-    return true;
+    return numberOfZeros;
 }
-console.log(isAllUpper('ALL UPPER'));
-console.log(isAllUpper('all lower'));
+console.log(beginningZeros('100'));
+console.log(beginningZeros('001'));
