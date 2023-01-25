@@ -1,16 +1,28 @@
-function twoSum(nums: number[], target: number): number[] {
-  let result: number[] = [];
+function generateParenthesis(n: number): string[] {
+  const stack: any = [];
+  const result: any = [];
 
-  for (let i = 0; i < nums.length; i++) {
-    if (i + 1 < nums.length - 1) {
-      for (let j = i + 1; j < nums.length; j++) {
-        if (nums[i] + nums[j] === target) {
-          result = [i, j];
-          break;
-        }
-      }
+  const backTrack = (openP: number, closedP: number) => {
+    if (openP === n && closedP === openP) {
+      result.push(stack.join(''));
+      return;
     }
-  }
 
+    if (openP < n) {
+      stack.push('(');
+      backTrack(openP + 1, closedP);
+      stack.pop();
+    }
+
+    if (closedP < openP) {
+      stack.push(')');
+      backTrack(openP, closedP + 1);
+      stack.pop();
+    }
+  };
+
+  backTrack(0, 0);
   return result;
 }
+
+console.log(generateParenthesis(3));
