@@ -1,28 +1,18 @@
-function generateParenthesis(n: number): string[] {
-  const stack: any = [];
-  const result: any = [];
+function topKFrequent(nums: number[], k: number): number[] {
+  const numsHash: { [key: string]: number } = {};
 
-  const backTrack = (openP: number, closedP: number) => {
-    if (openP === n && closedP === openP) {
-      result.push(stack.join(''));
-      return;
-    }
+  for (let i = 0; i < nums.length; i++) {
+    if (numsHash[nums[i]]) numsHash[nums[i]] += 1;
+    else numsHash[nums[i]] = 1;
+  }
 
-    if (openP < n) {
-      stack.push('(');
-      backTrack(openP + 1, closedP);
-      stack.pop();
-    }
+  const sortedEntires = Object.entries(numsHash).sort((a, b) => b[1] - a[1]);
+  const result = [];
 
-    if (closedP < openP) {
-      stack.push(')');
-      backTrack(openP, closedP + 1);
-      stack.pop();
-    }
-  };
-
-  backTrack(0, 0);
+  for (let i = 0; i < k; i++) {
+    result.push(Number(sortedEntires[i][0]));
+  }
   return result;
 }
 
-console.log(generateParenthesis(3));
+console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
