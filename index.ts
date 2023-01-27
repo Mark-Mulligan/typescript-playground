@@ -1,18 +1,19 @@
-function topKFrequent(nums: number[], k: number): number[] {
-  const numsHash: { [key: string]: number } = {};
+function productExceptSelf(nums: number[]): number[] {
+  const result = new Array(nums.length).fill(1);
 
+  let prefix = 1;
   for (let i = 0; i < nums.length; i++) {
-    if (numsHash[nums[i]]) numsHash[nums[i]] += 1;
-    else numsHash[nums[i]] = 1;
+    result[i] = prefix;
+    prefix *= nums[i];
   }
 
-  const sortedEntires = Object.entries(numsHash).sort((a, b) => b[1] - a[1]);
-  const result = [];
-
-  for (let i = 0; i < k; i++) {
-    result.push(Number(sortedEntires[i][0]));
+  let postFix = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+    result[i] *= postFix;
+    postFix *= nums[i];
   }
+
   return result;
 }
 
-console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
+console.log(productExceptSelf([-1, 1, 0, -3, 3]));
