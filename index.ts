@@ -1,17 +1,14 @@
-function isPalindrome(s: string): boolean {
-  let formattedS = s.toLowerCase().replace(/[^\w]|_/g, '');
+function twoSum(numbers: number[], target: number): number[] {
   let p1 = 0;
-  let p2 = formattedS.length - 1;
-
-  console.log(formattedS);
+  let p2 = numbers.length - 1;
 
   while (p1 < p2) {
-    if (formattedS[p1] !== formattedS[p2]) return false;
-    p1++;
-    p2--;
-  }
+    let sum = numbers[p1] + numbers[p2];
 
-  return true;
+    if (sum === target) return [p1 + 1, p2 + 1];
+    if (sum < target) p1++;
+    if (sum > target) p2--;
+  }
 }
 
-console.log(isPalindrome('ab_a'));
+console.log(twoSum([2, 7, 11, 15], 9));
