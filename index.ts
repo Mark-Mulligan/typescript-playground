@@ -1,27 +1,17 @@
-function longestConsecutive(nums: number[]): number {
-  if (nums.length < 2) return nums.length;
+function isPalindrome(s: string): boolean {
+  let formattedS = s.toLowerCase().replace(/[^\w]|_/g, '');
+  let p1 = 0;
+  let p2 = formattedS.length - 1;
 
-  const sortedNums = nums.sort((a, b) => a - b);
+  console.log(formattedS);
 
-  let longestSequence = 1;
-  let currentSequence = 1;
-  let previousNum = nums[0];
-
-  for (let i = 1; i < sortedNums.length; i++) {
-    const currentNum = sortedNums[i];
-    if (currentNum === previousNum) continue;
-
-    if (currentNum === previousNum + 1) {
-      currentSequence++;
-      if (currentSequence > longestSequence) longestSequence = currentSequence;
-    } else {
-      currentSequence = 1;
-    }
-
-    previousNum = sortedNums[i];
+  while (p1 < p2) {
+    if (formattedS[p1] !== formattedS[p2]) return false;
+    p1++;
+    p2--;
   }
 
-  return longestSequence;
+  return true;
 }
 
-console.log(longestConsecutive([0, 3, 7, 2, 5, 8, 4, 6, 0, 1]));
+console.log(isPalindrome('ab_a'));
